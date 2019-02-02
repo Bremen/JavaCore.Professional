@@ -37,19 +37,19 @@ public class SwapArrayElements {
      * @param args
      */
     public static void main(String[] args) {
-        //Тестируем массив с целочисленным массивом
+        //Тестируем массив с целочисленными
         Integer[] intArray = {1, 2, 3, 4, 5};
         printArray(intArray);
         swapElements(intArray, 0, 1);
         printArray(intArray);
 
-        //Тестируем массив с массивом с десятичными числами
+        //Тестируем массив с десятичными числами
         Double[] doubleArray = {1.0, 2.0, 3.0, 4.0, 5.0};
         printArray(doubleArray);
         swapElements(doubleArray, 0, 1);
         printArray(doubleArray);
 
-        //Тестируем массив с массивом строк
+        //Тестируем массив со строками
         String[] stringArray = {"str1", "str2", "str3", "str4", "str5"};
         printArray(stringArray);
         swapElements(stringArray, 0, 1);
