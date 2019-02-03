@@ -12,12 +12,14 @@ public abstract class Fruit {
     }
 }
 
+//яблоки
 class Apple extends Fruit{
     public Apple(double weight){
         super(weight);
     }
 }
 
+//апельсины
 class Orange extends Fruit{
     public Orange(double weight){
         super(weight);

@@ -48,11 +48,11 @@ public class FruitBoxTest {
         boolean isBoxesWeightEqual = appleBox.compare(orangeBox);
         System.out.println("compare boxes with apples and oranges: " + isBoxesWeightEqual);
 
-        //ВОПРОС!!!!
+        //ВОПРОС!!!
         //boolean isBoxesWeightEqual = appleBox.compare(new FruitBox<>()); С каким типом коробка передастся в функцию?
     }
 
-    //ВОПРОС!!!
+    //ВОПРОС!!
     //Метод описывающий ситацию по которой следующий вопрос: можно ли как-то сделать так,
     // чтобы коробка с фруктами определялась только потомками класса Fruit? И вообще нужно ли это?
     public static void questoin(){
