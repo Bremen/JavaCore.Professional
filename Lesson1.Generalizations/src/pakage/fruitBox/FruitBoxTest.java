@@ -19,7 +19,7 @@
 
 Не забываем про метод добавления фрукта в коробку.
  */
-package fruitBox;
+package pakage.fruitBox;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package fruitBox;
+package pakage.fruitBox;
 
 import java.util.ArrayList;
 

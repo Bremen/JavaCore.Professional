@@ -1,4 +1,4 @@
-package fruitBox;
+package pakage.fruitBox;
 
 public abstract class Fruit {
     private final double weight;
