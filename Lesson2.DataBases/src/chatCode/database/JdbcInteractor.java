@@ -3,6 +3,8 @@ package chatCode.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.TreeSet;
 
 public class JdbcInteractor {
@@ -20,14 +22,31 @@ public class JdbcInteractor {
 
         String sql = String.format("select nickname from users where login = '%s' and password = '%s'", login, pass);
 
-
         ResultSet rs = jc.executeQuery(sql);
-
 
         if (rs != null) {
             try {
                 if (rs.next()) {
                     result = rs.getString("nickname");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public synchronized Integer getNickIdByNick(String nick) {
+        Integer result = null;
+
+        String sql = String.format("select id from users where nickname = '%s'", nick);
+
+        ResultSet rs = jc.executeQuery(sql);
+
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    result = rs.getInt("id");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -68,6 +87,18 @@ public class JdbcInteractor {
 
             jc.executeUpdate(query);
         }
+    }
+
+    // Добавить в базу историй сообщений
+    public synchronized void addMessageToHistory(String nick, String message) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+
+        String query = String.format(
+                "INSERT INTO history (nick_id_sender, send_time, message) VALUES\n" +
+                        "(%s, '%s', '%s')", getNickIdByNick(nick), sdf.format(cal.getTime()), message);
+
+        jc.executeUpdate(query);
     }
 
     public synchronized void removeFromBlackList(String nick, TreeSet<String> unblocked) {

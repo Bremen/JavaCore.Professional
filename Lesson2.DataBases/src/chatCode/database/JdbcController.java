@@ -84,16 +84,30 @@ public class JdbcController {
 
     private void createTables(){
         try {
-            //Создаем таблицу продуктов если она еще не была создана
+            //Создаем таблицу пользователей если она еще не была создана
             statement.execute("CREATE TABLE IF NOT EXISTS users(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, " +
                     "login TEXT NOT NULL UNIQUE, " +
                     "password TEXT NOT NULL, " +
                     "nickname TEXT NOT NULL UNIQUE)");
 
+            //Создаем таблицу черного списка если она еще не была создана
             statement.execute("CREATE TABLE IF NOT EXISTS blacklist(" +
                     "nick_id INTEGER NOT NULL, " +
                     "blocked_nick_id INTEGER NOT NULL)");
+
+            //Создаем таблицу истории сообщений если она еще не была создана
+            statement.execute("CREATE TABLE IF NOT EXISTS history(" +
+                    "message_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, " +
+                    "nick_id_sender INTEGER NOT NULL, " +
+                    "send_time text NOT NULL, " +
+                    "message text NOT NULL)");
+
+            //Создаем таблицу пользователей которые не получали сообщений, потому что бы в ЧС если она еще не была создана
+            statement.execute("CREATE TABLE IF NOT EXISTS recipients(" +
+                    "message_id INTEGER NOT NULL, " +
+                    "nick_id_not_recipient INTEGER NOT NULL)");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

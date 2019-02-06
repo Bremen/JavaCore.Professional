@@ -165,9 +165,12 @@ public class ClientHandler implements ChatUtilizer {
         try {
             os.writeUTF(message);
             os.flush();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        ji.addMessageToHistory(nickname, message);
     }
 
     // Получить blacklist
