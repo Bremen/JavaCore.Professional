@@ -39,34 +39,42 @@ public class MainDB {
             e.printStackTrace();
         }
 
+        //Создаем таблицу продуктов если она еще не была создана
         stmt.execute("CREATE TABLE IF NOT EXISTS products(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, " +
                 "prodid INTEGER NOT NULL UNIQUE, " +
                 "title TEXT NOT NULL, " +
                 "cost REAL NOT NULL)");
 
+        //очищаем таблицу перед заполнением
         stmt.execute("DELETE from products");
+
+        //сбрасываем счетчик автоинкрементирования первичного ключа на ноль
         stmt.execute("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='products'");
 
-         long t = System.currentTimeMillis();
+        //засекаем время перед началом заполнения таблицы данными
+        long t = System.currentTimeMillis();
 
+        //отключаем автосохранение, чтобы ускорить процесс заполнения таблицы
         connection.setAutoCommit(false);
 
-
+        //подготавливаем шаблон для запроса на добавление записи
         pstmt = connection.prepareStatement("INSERT INTO products (prodid, title, cost)\n" +
                 "VALUES (?, ?, ?)");
 
+        //заполняем таблицу
         for (int i = 1; i <= 10000; i++) {
             pstmt.setInt(1, i);
             pstmt.setString(2, "товар" + i);
             pstmt.setInt(3, i * 10);
             pstmt.addBatch();
         }
-
         pstmt.executeBatch();
 
+        //включаем автосохранение снова
         connection.setAutoCommit(true);
 
+        //высчитываем и выводим в консоль время в мс, потраченное на заполнение таблицы
         System.out.println(System.currentTimeMillis() - t);
 
         disconnect();
