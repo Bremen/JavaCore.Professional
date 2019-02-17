@@ -1,5 +1,10 @@
+import java.util.concurrent.CountDownLatch;
+
 public class Car implements Runnable {
     private static int CARS_COUNT;
+    public static CountDownLatch cdStart; //Задвижка для одновременного старта
+    public static CountDownLatch cdWin ;  //Задвижка для первого финишировавшего
+    public static CountDownLatch cdFinish;//Задвижка для завершения гонки
     static {
         CARS_COUNT = 0;
     }
@@ -27,8 +32,21 @@ public class Car implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        cdStart.countDown();
+        try {
+            cdStart.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
+
+        if (cdWin.getCount() > 0){ // Если еще не было финишировавшего, то объявляем победителя!
+            cdWin.countDown();
+            System.out.println(this.name + " WIN");
+        }
+
+        cdFinish.countDown();
     }
 }
