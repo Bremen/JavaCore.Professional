@@ -18,11 +18,11 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 public class ArrayAlterLastFourNumberTest {
     @Parameterized.Parameters
-    public static Collection data() {
-        return Arrays.asList(new Integer[][][] {
-                {{1,4,1,2}, {1,2}},   // четверка в серидине
-                {{4,2,2,2}, {2,2,2}}, // четверка в начале
-                {{1,2,3,4}, {}} // четверка в конце
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                {new Integer[]{1,4,1,2}, new Integer[]{1,2}},   // четверка в серидине
+                {new Integer[]{4,2,2,2}, new Integer[]{2,2,2}}, // четверка в начале
+                {new Integer[]{1,2,3,4}, new Integer[]{}}, // четверка в конце
         });
     }
 
