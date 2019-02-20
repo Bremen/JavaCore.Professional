@@ -6,8 +6,6 @@
 (по 3-4 варианта входных данных). Вх: [ 1 2 4 4 2 3 4 1 7 ] -> вых: [ 1 7 ].
  */
 
-import java.util.Arrays;
-
 public class TakingArrayAfterNumberFour {
 
     /**
