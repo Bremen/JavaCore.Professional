@@ -8,7 +8,6 @@
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -60,6 +59,13 @@ public class ArrayAlterLastFourNumberTest {
     @Test(expected = RuntimeException.class)
     public void nullArrayTest() {
         Integer[] in = null;
+        System.out.println("in: " + Arrays.toString(in));
+        Assert.assertEquals(out, takingArray.takeArrayAfterNumberFour(in));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void arrayWithoutFour() {
+        Integer[] in = {1,2,3,5,6};
         System.out.println("in: " + Arrays.toString(in));
         Assert.assertEquals(out, takingArray.takeArrayAfterNumberFour(in));
     }
